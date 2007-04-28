@@ -1,0 +1,82 @@
+%{!?_texmf: %global _texmf %(eval "echo `kpsewhich -expand-var '$TEXMFMAIN'`")}
+
+%define texpkg      llncs
+%define texpkgdir   %{_texmf}/tex/latex/%{texpkg}
+%define texpkgdoc   %{_texmf}/doc/latex/%{texpkg}
+%define bibpkgdir   %{_texmf}/bibtex/bib/%{texpkg}
+%define bstpkgdir   %{_texmf}/bibtex/bst/%{texpkg}
+%define bibpkgdoc   %{_texmf}/doc/bibtex/%{texpkg}
+
+Name:           tetex-%{texpkg}
+Version:        2.14
+Release:        %mkrel 1
+Epoch:          0
+Summary:        LaTeX2e package for Springer-Verlag Lecture Notes in Computer Science (LNCS)
+Group:          Publishing
+License:        Distributable
+URL:            http://www.springer.com/
+Source0:        ftp://ftp.springer.de/pub/tex/latex/llncs/latex2e/llncs2e.zip
+Requires:       tetex-latex
+Requires(post): tetex
+Requires(postun): tetex
+BuildRequires:  tetex-latex
+BuildArch:      noarch
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
+
+%description
+The LaTeX2e package for Lecture Notes in Computer Science (LNCS) of
+Springer-Verlag.
+
+%prep
+%setup -q -c -n %{texpkg}
+%{__perl} -pi -e 's/\r$//g' *.bst *.cls *.dem *.doc *.ind *.me *.sty *.txt
+
+%build
+
+%install
+%{__rm} -rf %{buildroot}
+
+%{__mkdir_p} %{buildroot}{%{texpkgdir},%{texpkgdoc}}
+%{__cp} -a llncs.cls %{buildroot}%{texpkgdir}/
+%{__cp} -a sprmindx.sty %{buildroot}%{texpkgdir}/
+%{__cp} -a llncsdoc.pdf %{buildroot}%{texpkgdoc}/
+%{__cp} -a llncsdoc.sty %{buildroot}%{texpkgdoc}/
+%{__cp} -a llncs.dem %{buildroot}%{texpkgdoc}/
+%{__cp} -a llncs.doc %{buildroot}%{texpkgdoc}/
+%{__cp} -a llncs.ind %{buildroot}%{texpkgdoc}/
+%{__cp} -a subjidx.ind %{buildroot}%{texpkgdoc}/
+%{__cp} -a llncs.dvi %{buildroot}%{texpkgdoc}/
+
+%{__mkdir_p} %{buildroot}{%{bibpkgdir},%{bstpkgdir},%{bibpkgdoc}}
+%{__cp} -a splncs.bst %{buildroot}%{bstpkgdir}/
+
+%clean
+%{__rm} -rf %{buildroot}
+
+
+%post
+%{_bindir}/texhash >/dev/null 2>&1 || :
+
+%postun
+%{_bindir}/texhash >/dev/null 2>&1 || :
+
+%triggerin -- lyx
+if [ $2 -gt 1 ]; then
+cd %{_datadir}/lyx && \
+  ./configure.py --without-latex-config > /dev/null 2>&1 ||:
+fi
+
+%triggerun -- lyx
+if [ $2 -eq 0 ]; then
+cd %{_datadir}/lyx && \
+  ./configure.py --without-latex-config > /dev/null 2>&1 ||:
+fi
+
+%files
+%defattr(0644,root,root,0755)
+%doc history.txt read.me
+%{texpkgdir}
+%{texpkgdoc}
+%{bibpkgdir}
+%{bstpkgdir}
+%{bibpkgdoc}
