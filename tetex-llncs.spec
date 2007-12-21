@@ -21,6 +21,7 @@ Requires(post): tetex
 Requires(postun): tetex
 BuildRequires:  tetex-latex
 BuildArch:      noarch
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 The LaTeX2e package for Lecture Notes in Computer Science (LNCS) of
