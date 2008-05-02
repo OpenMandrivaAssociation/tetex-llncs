@@ -8,7 +8,7 @@
 %define bibpkgdoc   %{_texmf}/doc/bibtex/%{texpkg}
 
 Name:           tetex-%{texpkg}
-Version:        2.14
+Version:        2.14.2007.12.11
 Release:        %mkrel 1
 Epoch:          0
 Summary:        LaTeX2e package for Springer-Verlag Lecture Notes in Computer Science (LNCS)
@@ -55,10 +55,14 @@ Springer-Verlag.
 
 
 %post
-%{_bindir}/texhash >/dev/null 2>&1 || :
+if [ -x %{_bindir}/texhash ] ; then
+    %{_bindir}/texhash >/dev/null 2>&1 || :
+fi
 
 %postun
-%{_bindir}/texhash >/dev/null 2>&1 || :
+if [ -x %{_bindir}/texhash ] ; then
+    %{_bindir}/texhash >/dev/null 2>&1 || :
+fi
 
 %triggerin -- lyx
 if [ $2 -gt 1 ]; then
