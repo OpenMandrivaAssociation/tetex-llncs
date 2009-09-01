@@ -9,7 +9,7 @@
 
 Name:           tetex-%{texpkg}
 Version:        2.14.2007.12.11
-Release:        %mkrel 2
+Release:        %mkrel 3
 Epoch:          0
 Summary:        LaTeX2e package for Springer-Verlag Lecture Notes in Computer Science (LNCS)
 Group:          Publishing
