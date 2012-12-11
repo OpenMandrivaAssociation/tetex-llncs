@@ -84,3 +84,33 @@ fi
 %{bibpkgdir}
 %{bstpkgdir}
 %{bibpkgdoc}
+
+
+%changelog
+* Tue Sep 01 2009 Tomasz Pawel Gajc <tpg@mandriva.org> 0:2.14.2007.12.11-3mdv2010.0
++ Revision: 423770
+- rebuild
+
+* Mon Jun 16 2008 Thierry Vignaud <tvignaud@mandriva.com> 0:2.14.2007.12.11-2mdv2009.0
++ Revision: 220282
+- rebuild
+
+* Fri May 02 2008 David Walluck <walluck@mandriva.org> 0:2.14.2007.12.11-1mdv2009.0
++ Revision: 200488
+- 2.14.2007.12.11 (2.14 11.12.07)
+- check for texhash in scriptlets
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tvignaud@mandriva.com>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Sun Apr 29 2007 David Walluck <walluck@mandriva.org> 0:2.14-1mdv2008.0
++ Revision: 19064
+- Import tetex-llncs
+
+
+
+* Sun Apr 29 2007 David Walluck <walluck@mandriva.org> 0:2.14-1mdv2008.0
+- release
