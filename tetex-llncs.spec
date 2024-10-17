@@ -14,7 +14,7 @@ Epoch:          0
 Summary:        LaTeX2e package for Springer-Verlag Lecture Notes in Computer Science (LNCS)
 Group:          Publishing
 License:        Distributable
-URL:            http://www.springer.com/
+URL:            https://www.springer.com/
 Source0:        ftp://ftp.springer.de/pub/tex/latex/llncs/latex2e/llncs2e.zip
 Requires:       tetex-latex
 Requires(post): tetex
